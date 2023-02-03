@@ -1,10 +1,12 @@
-import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
+import { StyleSheet, Button, Text, Image, View, ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
+import { useLayoutEffect } from "react";
+import IconButton from "../components/IconButton";
 
-export default function MealScreen({ route }) {
+export default function MealScreen({ route, navigation }) {
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
@@ -13,6 +15,16 @@ export default function MealScreen({ route }) {
     selectedMeal.imageUrl === ""
       ? require("../assets/kisir.png")
       : { uri: selectedMeal.imageUrl };
+
+  function headerButtonPressHandler(){
+    console.log("pressed")
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <IconButton icon="star" color="white" onPress={headerButtonPressHandler}/>
+    })
+  }, [navigation, headerButtonPressHandler])
 
   return (
     <ScrollView>
