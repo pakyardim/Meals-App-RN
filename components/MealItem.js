@@ -18,6 +18,8 @@ export default function MealItem({ id, title, imageUrl, duration, complexity, af
     });
   }
 
+  const imgSrc = imageUrl === "" ? require('../assets/kisir.png') : { uri: imageUrl }
+
   return (
     <View style={styles.mealItem}>
       <Pressable
@@ -27,7 +29,7 @@ export default function MealItem({ id, title, imageUrl, duration, complexity, af
       >
         <View style={styles.innerContainer}>
           <View>
-            <Image source={{ uri: imageUrl }} style={styles.image} />
+            <Image source={imgSrc} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
           <MealDetails duration={duration} complexity={complexity} affordability={affordability} />

@@ -333,5 +333,32 @@ export const MEALS = [
     true,
     true,
     true
-  )
+  ),
+  new Meal(
+    'm11',
+    ['c5'],
+    'Şalgamlı Kısır',
+    'kağanın evde beleş',
+    'simple',
+    "",
+    "20-30 felan",
+    [
+      '2 su bardağı ince bulgur',
+      'su bardağı acısız şalgam suyu',
+      '1 kutu konserve mısır',
+      '8-10 adet salatalık turşusu',
+      '2 çay kaşığı tuz ',
+      'Sonsuz Sevgi <3'
+    ],
+    [
+      'Kısırlık, ince bulgurunuzu genişçe bir kaba alın. Şalgam suyunuzu bir tencereye alın ve kaynatın.',
+      'Kaynayan şalgamı bulgurun üzerine yavaş yavaş karıştırarak, dökün. Üzerini kapatın ve bulgurların şişmesi için bekletin.',
+      'Yemeği yaptığınız insanları düşünerek sevgi dolun.',
+      'Gerisini kağan bilio',
+    ],
+    false,
+    true,
+    true,
+    true
+  ),
 ];
