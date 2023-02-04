@@ -7,9 +7,9 @@ import {
   Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import MealDetails from "./MealDetails";
+import MealDetails from "../MealDetails";
 
-export default function MealItem({ id, title, imageUrl, duration, complexity, affordability}) {
+export default function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
   const navigation = useNavigation();
 
   function selectMealItemHandler() {
@@ -18,7 +18,7 @@ export default function MealItem({ id, title, imageUrl, duration, complexity, af
     });
   }
 
-  const imgSrc = imageUrl === "" ? require('../assets/kisir.png') : { uri: imageUrl }
+  const imgSrc = imageUrl === "" ? require('../../assets/kisir.png') : { uri: imageUrl }
 
   return (
     <View style={styles.mealItem}>

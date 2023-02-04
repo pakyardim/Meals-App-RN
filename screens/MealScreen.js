@@ -1,30 +1,44 @@
-import { StyleSheet, Button, Text, Image, View, ScrollView } from "react-native";
+import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import List from "../components/MealDetail/List";
 import Subtitle from "../components/MealDetail/Subtitle";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useContext } from "react";
 import IconButton from "../components/IconButton";
+import { FavouritesContext } from "../store/context/favourites-context";
 
 export default function MealScreen({ route, navigation }) {
+  const favMealContext = useContext(FavouritesContext);
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+
+  const mealIsFavourite = favMealContext.ids.includes(mealId);
 
   const imgSrc =
     selectedMeal.imageUrl === ""
       ? require("../assets/kisir.png")
       : { uri: selectedMeal.imageUrl };
 
-  function headerButtonPressHandler(){
-    console.log("pressed")
+  function changeFavouriteStatusHandler() {
+    if(mealIsFavourite){
+      favMealContext.removeFavourite(mealId);
+    } else{
+      favMealContext.addFavourite(mealId);
+    }
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <IconButton icon="star" color="white" onPress={headerButtonPressHandler}/>
-    })
-  }, [navigation, headerButtonPressHandler])
+      headerRight: () => (
+        <IconButton
+          icon={mealIsFavourite ? 'star' : 'star-outline'}
+          color="white"
+          onPress={changeFavouriteStatusHandler}
+        />
+      ),
+    });
+  }, [navigation, changeFavouriteStatusHandler]);
 
   return (
     <ScrollView>
@@ -57,7 +71,7 @@ const styles = StyleSheet.create({
     margin: 8,
     textAlign: "center",
   },
-  detailText:{
+  detailText: {
     color: "#ccc",
   },
   image: {
@@ -74,5 +88,5 @@ const styles = StyleSheet.create({
     color: "#ccc",
     textAlign: "center",
     margin: 32,
-  }
+  },
 });
